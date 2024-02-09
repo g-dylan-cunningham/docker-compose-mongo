@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
+import { WorkoutContextProvider } from "./contexts/workoutContext";
+import Main from "./components/Main";
 
 function App() {
   const [data, setData] = useState([]);
@@ -32,6 +34,12 @@ function App() {
     fetchData();
   }, []);
 
+  const clearForm = () => {
+    titleRef.current.value = '';
+    loadRef.current.value = '';
+    repRef.current.value = '';
+  }
+
   const postWorkout = async (e) => {
     e.preventDefault();
     const body = {
@@ -55,6 +63,7 @@ function App() {
         .then((elem) => {
           console.log("elem", elem);
           setData([...data, elem]);
+          clearForm()
         })
         .catch((error) => {
           console.log(error);
@@ -66,35 +75,9 @@ function App() {
 
   return (
     <div className="App">
-      <h1>response:</h1>
-      <ul>
-        {data?.map((elem) => (
-          <li id={elem._id}>
-            <h4>{elem.title}</h4>
-            <p>reps: {elem.reps}</p>
-            <p>load: {elem.load}</p>
-          </li>
-        ))}
-      </ul>
-
-      <section>
-        <form onSubmit={postWorkout}>
-          <label>
-            Title:
-            <input type="text" id="title" ref={titleRef} />
-          </label>
-          <label>
-            Reps:
-            <input type="text" id="reps" ref={repRef} />
-          </label>
-          <label>
-            Load:
-            <input type="text" id="load" ref={loadRef} />
-          </label>
-
-          <input type="submit" value="SUBMIT" />
-        </form>
-      </section>
+      <WorkoutContextProvider>
+        <Main />
+      </WorkoutContextProvider>
     </div>
   );
 }
