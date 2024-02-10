@@ -4,7 +4,6 @@ import useWorkoutContext from '../hooks/useWorkoutContext'
 const Display = ({ data }) => {
 
   const {workouts} = useWorkoutContext()
-  console.log('context;,', workouts)
   return (
     <div>
       <h1>response:</h1>

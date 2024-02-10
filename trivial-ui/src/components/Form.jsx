@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useRef } from "react";
 import useWorkoutContext from "../hooks/useWorkoutContext";
-const Form = ({ titleRef, repRef, loadRef, clearForm }) => {
+const Form = ({}) => {
   const { dispatch } = useWorkoutContext();
+
+  const titleRef = useRef();
+  const loadRef = useRef();
+  const repRef = useRef();
+
+  const clearForm = () => {
+    titleRef.current.value = "";
+    loadRef.current.value = "";
+    repRef.current.value = "";
+  };
 
   const postWorkout = async (e) => {
     e.preventDefault();
@@ -24,7 +34,6 @@ const Form = ({ titleRef, repRef, loadRef, clearForm }) => {
           return response.json();
         })
         .then((elem) => {
-          console.log("elem", elem);
           dispatch({ type: "CREATE_WORKOUT", payload: elem });
           clearForm();
         })
