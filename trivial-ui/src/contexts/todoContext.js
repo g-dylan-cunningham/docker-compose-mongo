@@ -8,11 +8,18 @@ export const todoReducer = (state, action) => {
 
   switch (type)  {
     case "SET_TODOS": 
-      return { todos: payload, ...state }
+      return { ...state, todos: payload }
     case "ADD_TODO":
-      return { payload, ...state }
+      return { ...state, todos: [payload, ...state.todos] }
     case "UPDATE_TODO":
-      return { ...state }
+      // const todos = ;
+      const todos = [ ...state.todos ].map(elem => {
+        if (payload.id && elem.id === payload.id) {
+          return payload;
+        }
+        return elem
+      })
+      return { ...state, todos }
     case "DELETE_TODO":
       return { ...state }
     default:
@@ -22,7 +29,6 @@ export const todoReducer = (state, action) => {
 
 export const TodoContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(todoReducer, { todos: null })
-
   return (
     <TodoContext.Provider value={{ ...state, dispatch }}>
       {children}

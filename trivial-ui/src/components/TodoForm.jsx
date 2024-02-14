@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import useTodoContext from '../hooks/useTodoContext'
 
 const TodoForm = () => {
+  const { dispatch } = useTodoContext();
   const [title, setTitle] = useState("");
   const [isComplete, setIsComplete] = useState(false);
 
@@ -16,6 +18,7 @@ const TodoForm = () => {
       body: JSON.stringify(body),
     })
     const todo = await response.json();
+    dispatch({ type: "ADD_TODO", payload: todo });
   };
 
   return (
