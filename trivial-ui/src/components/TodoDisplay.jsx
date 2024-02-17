@@ -19,7 +19,7 @@ const TodoDisplay = () => {
   return (
     <ul>
       {todos?.map((todo) => (
-        <li>
+        <li key={todo._id}>
           <label>title:</label>
           <span>{todo.title}</span>
           <label>is complete?</label>

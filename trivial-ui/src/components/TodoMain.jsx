@@ -12,7 +12,6 @@ const TodoMain = () => {
         method: "GET",
       })
       const todos = await response.json();
-      console.log('all todos', todos)
       dispatch({ type: "SET_TODOS", payload: todos })
     }
     fetchTodos();

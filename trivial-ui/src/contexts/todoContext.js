@@ -4,7 +4,6 @@ export const TodoContext = createContext();
 
 export const todoReducer = (state, action) => {
   const { type, payload } = action;
-  console.log('payload', type, payload)
 
   switch (type)  {
     case "SET_TODOS": 
