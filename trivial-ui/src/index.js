@@ -3,11 +3,20 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { WorkoutContextProvider } from "./contexts/workoutContext";
+import { AuthContextProvider } from "./contexts/authContext";
+import { TodoContextProvider } from "./contexts/todoContext";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <AuthContextProvider>
+      <WorkoutContextProvider>
+        <TodoContextProvider>
+          <App />
+        </TodoContextProvider>
+      </WorkoutContextProvider>
+    </AuthContextProvider>
   </React.StrictMode>
 );
 

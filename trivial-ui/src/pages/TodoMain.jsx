@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-import TodoForm from "./TodoForm";
-import TodoDisplay from './TodoDisplay';
+import TodoForm from "../components/TodoForm";
+import TodoDisplay from '../components/TodoDisplay';
 import useTodoContext from "../hooks/useTodoContext";
-
 
 const TodoMain = () => {
   const { dispatch } = useTodoContext();
+
   useEffect(() => {
     const fetchTodos = async () => {
       const response = await fetch('http://localhost:4000/todo', {
