@@ -1,8 +1,11 @@
 import React, { useState, useContext } from "react";
 import useTodoContext from '../hooks/useTodoContext'
+import useAuthContext from "../hooks/useAuthContext";
 
 const TodoForm = () => {
   const { dispatch } = useTodoContext();
+  const { user } = useAuthContext()
+
   const [title, setTitle] = useState("");
   const [isComplete, setIsComplete] = useState(false);
 
@@ -14,6 +17,7 @@ const TodoForm = () => {
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${user.token}`
       },
       body: JSON.stringify(body),
     })

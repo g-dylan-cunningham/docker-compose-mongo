@@ -1,8 +1,10 @@
 import React from "react";
 import useTodoContext from "../hooks/useTodoContext";
+import useAuthContext from "../hooks/useAuthContext";
 
 const TodoDisplay = () => {
   const { todos, dispatch } = useTodoContext();
+  const { user } = useAuthContext()
 
   const handleCheckClick = async (todo) => {
     const response = await fetch(`http://localhost:4000/todo?id=${todo._id}`, {
@@ -10,6 +12,7 @@ const TodoDisplay = () => {
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${user.token}`
       },
       body: JSON.stringify({ isComplete: todo.isComplete }),
     });

@@ -6,7 +6,9 @@ const {
   getAllTodos,
   updateTodo
 } = require('../controllers/todoController');
+const requireAuth = require('../middleware/requireAuth')
 
+router.use(requireAuth)
 
 router.get('/', getAllTodos)
 

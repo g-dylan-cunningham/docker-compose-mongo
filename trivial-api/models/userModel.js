@@ -2,8 +2,6 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const validator = require("validator");
 
-
-
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
@@ -20,7 +18,6 @@ const userSchema = new Schema({
 
 // extending the user model to include a custom method
 userSchema.statics.signup = async function (email, password) {
-  
   // validation
   if (!email || !password) {
     throw Error("email and password are required");
@@ -62,11 +59,10 @@ userSchema.statics.signup = async function (email, password) {
 };
 
 userSchema.statics.login = async function (email, password) {
-    // validation
-    if (!email || !password) {
-      throw Error("email and password are required");
-    }
-
+  // validation
+  if (!email || !password) {
+    throw Error("email and password are required");
+  }
 
   const user = await this.findOne({ email });
   if (!user) {
